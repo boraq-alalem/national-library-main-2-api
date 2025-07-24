@@ -1,6 +1,7 @@
 # dependencies
 node_modules/
-
+# android/ - keeping android folder for mobile build
+android
 # production
 build/
 dist/

@@ -1,4 +1,5 @@
 import { Box, Typography, Grid, Card, CardMedia, Container, useTheme } from '@mui/material';
+import MainTitle from '../MainTitle';
 
 // قائمة الصور من مجلد public/portfolio
 const images = [
@@ -17,51 +18,56 @@ const PortfolioSection = () => {
     <Box
       sx={{
         py: { xs: 6, md: 10 },
-        background: theme.palette.mode === 'light'
-          ? 'linear-gradient(120deg, #e0eafc 0%, #f5f7fa 100%)'
-          : 'linear-gradient(120deg, #23272f 0%, #2C3E50 100%)',
+        background: theme.palette.bg2.main,    
+        ...theme.bgGrid2,   
+
       }}
     >
-      <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          fontWeight={800}
-          mb={6}
-          color={theme.palette.mode === 'light' ? '#2C3E50' : '#fff'}
-        >
-          معرض الأعمال
-        </Typography>
-        <Grid container spacing={3} justifyContent="center">
-          {images.map((img, idx) => (
-            <Grid item xs={12} sm={6} md={4} key={idx}>
-              <Card
-                sx={{
-                  borderRadius: 4,
-                  boxShadow: theme.palette.mode === 'light' ? 4 : 8,
-                  overflow: 'hidden',
-                  transition: '0.3s',
-                  background: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.paper,
-                  '&:hover': {
-                    boxShadow: theme.palette.mode === 'light' ? 8 : 16,
-                    transform: 'scale(1.03)',
-                  },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={img}
-                  alt={`معرض الأعمال ${idx + 1}`}
+      <Container maxWidth="lg" sx={{display:'flex', flexDirection:'column'}}>
+
+        <MainTitle mainTitle={"معرض الأعمال"} />
+
+        <Grid container spacing={3} justifyContent="center" mt={5}>
+          {images.map((img, idx) => {
+            const webp = img.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+            return (
+              <Grid item xs={12} sm={6} md={4} key={idx}>
+                <Card
                   sx={{
-                    height: 240,
-                    objectFit: 'cover',
-                    filter: theme.palette.mode === 'dark' ? 'brightness(0.92)' : 'none',
+                    borderRadius: 4,
+                    boxShadow: theme.palette.mode === 'light' ? 4 : 8,
+                    overflow: 'hidden',
                     transition: '0.3s',
+                    background: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.paper,
+                    '&:hover': {
+                      boxShadow: theme.palette.mode === 'light' ? 8 : 16,
+                      transform: 'scale(1.03)',
+                    },
                   }}
-                />
-              </Card>
-            </Grid>
-          ))}
+                >
+                  <picture>
+                    <source srcSet={webp} type="image/webp" />
+                    <img
+                      src={img}
+                      alt={`معرض الأعمال ${idx + 1}`}
+                      loading={idx < 2 ? "eager" : "lazy"}
+                      width="400"
+                      height="240"
+                      style={{
+                        height: 240,
+                        width: '100%',
+                        objectFit: 'cover',
+                        filter: theme.palette.mode === 'dark' ? 'brightness(0.92)' : 'none',
+                        transition: '0.3s',
+                        display: 'block',
+                      }}
+                      decoding="async"
+                    />
+                  </picture>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </Box>

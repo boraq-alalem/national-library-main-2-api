@@ -1,6 +1,7 @@
 import { Box, Container, Typography, Button, Grid, useTheme } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { alpha } from '@mui/material/styles';
 
 const HeroSection = () => {
   const theme = useTheme();
@@ -29,9 +30,8 @@ const HeroSection = () => {
           background: theme.palette.mode === 'light'
             // ? 'linear-gradient(120deg, #e0eafc99 0%, #f5f7fa99 100%)'
             // ? 'linear-gradient(120deg, rgb(0 0 0 / 60%) 0%, rgb(87 113 11 / 32%) 100%)'
-            ? 'linear-gradient(120deg,rgba(26, 28, 29, 0.6) 0%,rgba(5, 16, 29, 0.77) 100%)'
-            
-            : 'linear-gradient(120deg,rgba(26, 28, 29, 0.6) 0%,rgba(5, 16, 29, 0.6) 100%)',
+            ? `linear-gradient(120deg,${alpha(theme.palette.primary.dark, 0.6)} 0%,${alpha(theme.palette.primary.main, 0.77)} 100%)`
+            : `linear-gradient(120deg,${alpha(theme.palette.background.paper, 0.6)} 0%,${alpha(theme.palette.background.default, 0.6)} 100%)`,
             
             // : 'linear-gradient(120deg, #2C3E5099 0%, #1a263499 100%)',
 
@@ -83,9 +83,9 @@ const HeroSection = () => {
                   fontWeight: 900,
                   mb: 2,
                   fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' },
-                  color: '#fff',
+                  color: theme.palette.common.white,
                   letterSpacing: 1,
-                  textShadow: '0 4px 24px rgba(0,0,0,0.25)',
+                  textShadow: `0 4px 24px ${alpha(theme.palette.common.black, 0.25)}`,
                 }}
               >
                 المكتبة الوطنية
@@ -95,10 +95,10 @@ const HeroSection = () => {
                 sx={{ 
                   mb: 4,
                   fontWeight: 400,
-                  color: 'rgba(255,255,255,0.92)',
+                  color: alpha(theme.palette.common.white, 0.92),
                   lineHeight: 1.7,
                   fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.3rem' },
-                  textShadow: '0 2px 12px rgba(0,0,0,0.18)',
+                  textShadow: `0 2px 12px ${alpha(theme.palette.common.black, 0.18)}`,
                 }}
               >
                 نساعدك في اعتماد عنوانك البحثي وضمان تفرّده
@@ -107,12 +107,12 @@ const HeroSection = () => {
               <Box sx={{ mt: 15, display: 'flex', justifyContent: 'center' }}>
                 <Box
                   sx={{
-                    background: 'rgba(255,255,255,0.13)',
+                    background: alpha(theme.palette.common.white, 0.13),
                     borderRadius: 4,
                     px: { xs: 2, sm: 4 },
                     py: { xs: 2, sm: 3 },
-                    boxShadow: '0 2px 16px 0 rgba(44,62,80,0.10)',
-                    borderLeft: '6px solid #2980B9',
+                    boxShadow: `0 2px 16px 0 ${alpha(theme.palette.text.primary, 0.10)}`,
+                    borderLeft: `6px solid ${theme.palette.info.main}`,
                     maxWidth: 500,
                   }}
                 >
@@ -121,9 +121,9 @@ const HeroSection = () => {
                     sx={{
                       fontWeight: 700,
                       fontStyle: 'italic',
-                      color: '#fff',
+                      color: theme.palette.common.white,
                       fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.35rem' },
-                      textShadow: '0 2px 12px rgba(44,62,80,0.18)',
+                      textShadow: `0 2px 12px ${alpha(theme.palette.text.primary, 0.18)}`,
                     }}
                   >
                     "المكتبة ليست مجموعة كتب فقط، بل هي نافذة تطل على المستقبل"
@@ -131,7 +131,7 @@ const HeroSection = () => {
                   <Typography
                     variant="subtitle2"
                     sx={{
-                      color: '#e0eafc',
+                      color: theme.palette.primary.light,
                       fontWeight: 500,
                       mt: 1,
                       textAlign: 'left',

@@ -1,0 +1,6 @@
+/* This file is no longer needed as styles have been migrated to Material-UI's theming system. */
+
+
+*{
+    backdrop-filter: blur('10px');
+}

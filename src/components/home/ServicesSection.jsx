@@ -1,15 +1,20 @@
 import { Box, Container, Typography, Grid, useTheme } from '@mui/material';
-import { 
-  Search, 
-  LibraryBooks, 
-  PictureAsPdf, 
-  CheckCircleOutline
+import { alpha } from '@mui/material/styles';
+import {
+  Search,
+  LibraryBooks,
+  PictureAsPdf,
+  CheckCircleOutline,
 } from '@mui/icons-material';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import ServiceCard from './ServiceCard';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Grow from '@mui/material/Grow';
 import TestSec from './TestSec';
+import MainTitle from '../MainTitle';
+import MainText from '../MainText';
+import SubTitle from '../SubTitle';
 
 const ServicesSection = () => {
   const theme = useTheme();
@@ -24,28 +29,24 @@ const ServicesSection = () => {
       title: '  العناوين المحجوزة المعتمدة',
       description: 'محرك بحث ذكي للتحقق من تفرد عنوانك البحثي وضمان عدم تكراره',
       icon: <Search fontSize="large" />,
-      color: '#1a3a6e',
       path: '/academic-search'
     },
     {
       title: 'استعراض الرسائل',
       description: 'مكتبة إلكترونية شاملة تتيح الوصول للرسائل الأكاديمية السابقة',
       icon: <LibraryBooks fontSize="large" />,
-      color: '#b89535',
       path: '/library'
     },
     {
-      title: 'اطلاع و تحميل  ',
-      description: 'إمكانية تصفح وتحميل مقتطفات من الرسائل العلمية للاستفادة منها',
-      icon: <PictureAsPdf fontSize="large" />,
-      color: '#457b9d',
-      path: '/downloads'
+      title: 'معاملات جاهزة',
+      description: 'خدمة تتيح لك الوصول السريع إلى نماذج معاملات رسمية ووثائق جاهزة ',
+      icon: <BookmarkAddedIcon fontSize="large" />,
+      path: '/ready-transactions'
     },
     {
       title: 'طلب الاعتماد',
       description: 'خدمة اعتماد عناوين الرسائل البحثية وفقاً للمعايير الأكاديمية',
       icon: <CheckCircleOutline fontSize="large" />,
-      color: '#387c6d',
       path: '/approval'
     }
   ];
@@ -54,9 +55,7 @@ const ServicesSection = () => {
     <Box
       sx={{
         py: { xs: 8, md: 10 },
-        backgroundColor: theme.palette.mode === 'light' 
-          ? 'rgba(240, 245, 250, 0.5)' 
-          : 'rgba(30, 30, 40, 0.5)',
+        backgroundColor: alpha(theme.palette.background.default, 0.5),
         position: 'relative',
       }}
     >
@@ -78,43 +77,11 @@ const ServicesSection = () => {
       
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box sx={{ mb: 6, textAlign: 'center' }}>
-          <Typography
-            component="span"
-            sx={{
-              color: theme.palette.secondary.main,
-              fontWeight: 600,
-              fontSize: '1rem',
-              display: 'block',
-              mb: 1,
-            }}
-          >
-            خدماتنا
-          </Typography>
+
           
-          <Typography 
-            variant="h2" 
-            component="h2"
-            sx={{ 
-              mb: 2,
-              fontWeight: 700,
-              color: theme.palette.text.primary
-            }}
-          >
-            ما نقدمه للباحثين
-          </Typography>
-          
-          <Typography 
-            variant="body1"
-            sx={{ 
-              mx: 'auto',
-              maxWidth: 700,
-              color: theme.palette.text.secondary,
-              lineHeight: 1.7,
-              fontSize: '1.1rem'
-            }}
-          >
-            توفر المكتبة الوطنية مجموعة من الخدمات المتكاملة لمساعدة الباحثين في جميع مراحل إعداد رسائلهم العلمية، بدءاً من اختيار العنوان وحتى الاعتماد النهائي.
-          </Typography>
+          <SubTitle subTitle={"خدماتنا"} />
+          <MainTitle mainTitle={"ما نقدمه للباحثين"} />
+          <MainText mainText={"توفر المكتبة الوطنية مجموعة من الخدمات المتكاملة لمساعدة الباحثين في جميع مراحل إعداد رسائلهم العلمية، بدءاً من اختيار العنوان وحتى الاعتماد النهائي."} />
         </Box>
         
         {/* <Grid container spacing={3}>

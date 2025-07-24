@@ -1,10 +1,11 @@
 import { Box, Typography, Paper, Button, useTheme } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { alpha } from '@mui/material/styles';
 
 const ServiceCard = ({ service, index }) => {
   const theme = useTheme();
-  const { title, description, icon, color, path } = service;
+  const { title, description, icon, path } = service;
 
   return (
     <Paper
@@ -13,25 +14,14 @@ const ServiceCard = ({ service, index }) => {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: 4,
         position: 'relative',
         overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        backgroundColor: theme.palette.mode === 'light' 
-          ? 'rgba(255, 255, 255, 0.9)' 
-          : 'rgba(30, 30, 30, 0.9)',
-        backdropFilter: 'blur(12px)',
-        border: `1px solid ${theme.palette.mode === 'light' 
-          ? 'rgba(255, 255, 255, 0.7)' 
-          : 'rgba(50, 50, 50, 0.7)'}`,
-        boxShadow: theme.palette.mode === 'light' 
-          ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
-          : '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+        ...theme.card2,
         '&:hover': {
           transform: 'translateY(-10px)',
-          boxShadow: theme.palette.mode === 'light' 
-            ? '0 15px 30px 0 rgba(31, 38, 135, 0.2)' 
-            : '0 15px 30px 0 rgba(0, 0, 0, 0.4)',
+          boxShadow: theme.palette.mode === 'light'
+            ? `0 15px 30px 0 ${alpha(theme.palette.primary.main, 0.2)}`
+            : `0 15px 30px 0 ${alpha(theme.palette.common.black, 0.4)}`,
           '& .icon-box': {
             transform: 'scale(1.1)',
           },
@@ -61,8 +51,8 @@ const ServiceCard = ({ service, index }) => {
           width: 80,
           height: 80,
           borderRadius: '50%',
-          background: color,
-          opacity: 0.1,
+          background: alpha(theme.palette.primary.main, 0.1),
+          opacity: 1,
         }}
       />
       
@@ -77,14 +67,12 @@ const ServiceCard = ({ service, index }) => {
             width: 70,
             height: 70,
             borderRadius: '50%',
-            backgroundColor: theme.palette.mode === 'light' 
-              ? 'rgba(255, 255, 255, 0.9)' 
-              : 'rgba(40, 40, 40, 0.9)',
-            border: `2px solid ${color}`,
-            color: color,
+            backgroundColor: alpha(theme.palette.background.paper, 0.9),
+            border: `2px solid ${theme.palette.primary.main}`,
+            color: theme.palette.primary.main,
             mb: 3,
             transition: 'transform 0.3s ease',
-            boxShadow: `0 5px 15px rgba(0, 0, 0, 0.1)`,
+            boxShadow: `0 5px 15px ${alpha(theme.palette.common.black, 0.1)}`,
           }}
         >
           {icon}

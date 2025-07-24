@@ -1,0 +1,50 @@
+# Force MIME types
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType application/json .json
+</IfModule>
+
+# Serve pre-compressed files
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Serve .br files if available
+  RewriteCond %{HTTP:Accept-Encoding} br
+  RewriteCond %{REQUEST_FILENAME}\.br -f
+  RewriteRule ^(.*)$ $1.br [L]
+  
+  # Serve .gz files if available  
+  RewriteCond %{HTTP:Accept-Encoding} gzip
+  RewriteCond %{REQUEST_FILENAME}\.gz -f
+  RewriteRule ^(.*)$ $1.gz [L]
+</IfModule>
+
+# Set headers for compressed files
+<IfModule mod_headers.c>
+  <FilesMatch "\.js\.gz$">
+    Header set Content-Type "application/javascript"
+    Header set Content-Encoding "gzip"
+  </FilesMatch>
+  
+  <FilesMatch "\.css\.gz$">
+    Header set Content-Type "text/css" 
+    Header set Content-Encoding "gzip"
+  </FilesMatch>
+  
+  <FilesMatch "\.js\.br$">
+    Header set Content-Type "application/javascript"
+    Header set Content-Encoding "br"
+  </FilesMatch>
+  
+  <FilesMatch "\.css\.br$">
+    Header set Content-Type "text/css"
+    Header set Content-Encoding "br" 
+  </FilesMatch>
+</IfModule>
+
+# Fallback compression
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  AddOutputFilterByType DEFLATE text/plain text/html text/css application/javascript application/json image/svg+xml
+</IfModule>

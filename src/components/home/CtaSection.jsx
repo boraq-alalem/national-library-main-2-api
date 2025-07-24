@@ -1,12 +1,18 @@
 import { Box, Container, Typography, Button, Paper, useTheme } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { alpha } from '@mui/material/styles';
 
 const CtaSection = () => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ py: { xs: 8, md: 10 } }}>
+    <Box sx={{ py: { xs: 8, md: 10 ,
+              background: theme.palette.bg1.main, 
+        ...theme.bgGrid3,  
+        borderColor:theme.palette.bg2.main, 
+        backgroundColor: theme.palette.bg1.main,   
+    } }}>
       <Container maxWidth="lg">
         <Paper
           elevation={0}
@@ -15,9 +21,9 @@ const CtaSection = () => {
             px: { xs: 3, md: 6 },
             borderRadius: 4,
             background: theme.palette.mode === 'light'
-              ? 'linear-gradient(135deg, #1a3a6e 0%, #2c5282 100%)'
-              : 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)',
-            color: '#fff',
+              ? `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`
+              : `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)} 0%, ${alpha(theme.palette.background.default, 0.8)} 100%)`,
+            color: theme.palette.mode === 'light' ? theme.palette.common.white : theme.palette.text.primary,
             textAlign: 'center',
             position: 'relative',
             overflow: 'hidden',
@@ -32,7 +38,7 @@ const CtaSection = () => {
               width: 200,
               height: 200,
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: alpha(theme.palette.common.white, 0.1),
             }}
           />
           <Box
@@ -43,7 +49,7 @@ const CtaSection = () => {
               width: 150,
               height: 150,
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: alpha(theme.palette.common.white, 0.1),
             }}
           />
           
@@ -72,48 +78,7 @@ const CtaSection = () => {
               استفد من خدماتنا المتكاملة للتحقق من تفرد عنوانك البحثي، واستعراض الرسائل السابقة، وطلب الاعتماد الرسمي لرسالتك العلمية.
             </Typography>
             
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-              <Button
-                component={Link}
-                to="/search"
-                variant="contained"
-                color="secondary"
-                size="large"
-                endIcon={<ArrowBack />}
-                sx={{
-                  py: 1.5,
-                  px: 4,
-                  fontWeight: 600,
-                  boxShadow: theme.shadows[4],
-                  backgroundColor: '#b89535',
-                  '&:hover': {
-                    backgroundColor: '#d1b266',
-                  }
-                }}
-              >
-                ابدأ البحث الآن
-              </Button>
-              
-              <Button
-                component={Link}
-                to="/contact"
-                variant="outlined"
-                size="large"
-                sx={{
-                  py: 1.5,
-                  px: 4,
-                  fontWeight: 600,
-                  color: '#fff',
-                  borderColor: 'rgba(255, 255, 255, 0.5)',
-                  '&:hover': {
-                    borderColor: '#fff',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  }
-                }}
-              >
-                تواصل معنا
-              </Button>
-            </Box>
+ 
           </Box>
         </Paper>
       </Container>

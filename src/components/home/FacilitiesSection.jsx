@@ -58,12 +58,16 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 // export default FacilitiesSection;
 
 import { Box, Container, Typography, Grid, Paper, useTheme } from '@mui/material';
-import { 
-  VerifiedUser, 
-  Gavel, 
-  School, 
-  MenuBook 
+import { alpha } from '@mui/material/styles';
+import {
+  VerifiedUser,
+  Gavel,
+  School,
+  MenuBook
 } from '@mui/icons-material';
+import MainTitle from '../MainTitle';
+import SubTitle from '../SubTitle';
+import MainText from '../MainText';
 
 const FacilitiesSection = () => {
   const theme = useTheme();
@@ -96,24 +100,19 @@ const FacilitiesSection = () => {
       id="about"
       sx={{ 
         py: { xs: 8, md: 10 },
-        backgroundColor: theme.palette.background.default
+        background: theme.palette.bg1.main, 
+        ...theme.bgGrid3,   
+        borderColor:theme.palette.bg1.main, 
+        backgroundColor: theme.palette.bg1.main,   
+
       }}
     >
       <Container maxWidth="lg">
         <Box sx={{ mb: 6, textAlign: 'center' }}>
           
-          <Typography 
-            variant="h2" 
-            component="h2"
-            sx={{ 
-              mb: 2,
-              fontWeight: 700,
-              color: theme.palette.text.primary
-            }}
-          >
-            مرافق المكتبة
-          </Typography>
-          
+          <MainTitle  mainTitle={"مرافق المكتبة"} />
+          <MainText mainText={"اكتشف مرافقنا المتنوعة المصممة لخدمتك"} />
+
 
         </Box>
         
@@ -129,23 +128,12 @@ const FacilitiesSection = () => {
                   flexDirection: 'column',
                   alignItems: 'center',
                   textAlign: 'center',
-                  borderRadius: 3,
-                  transition: 'all 0.3s ease',
-                  backgroundColor: theme.palette.mode === 'light' 
-                    ? 'rgba(255, 255, 255, 0.8)' 
-                    : 'rgba(30, 30, 30, 0.8)',
-                  backdropFilter: 'blur(10px)',
-                  border: `1px solid ${theme.palette.mode === 'light' 
-                    ? 'rgba(255, 255, 255, 0.7)' 
-                    : 'rgba(50, 50, 50, 0.7)'}`,
-                  boxShadow: theme.palette.mode === 'light' 
-                    ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
-                    : '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+                  ...theme.card1,
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    boxShadow: theme.palette.mode === 'light' 
-                      ? '0 15px 30px 0 rgba(31, 38, 135, 0.2)' 
-                      : '0 15px 30px 0 rgba(0, 0, 0, 0.4)',
+                    boxShadow: theme.palette.mode === 'light'
+                      ? `0 15px 30px 0 ${alpha(theme.palette.primary.main, 0.2)}`
+                      : `0 15px 30px 0 ${alpha(theme.palette.common.black, 0.4)}`,
                   }
                 }}
               >

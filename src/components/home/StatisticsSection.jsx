@@ -6,6 +6,8 @@ import {
   CheckCircle,
   Timeline
 } from '@mui/icons-material';
+import MainTitle from '../MainTitle';
+import MainText from '../MainText';
 
 const StatisticsSection = () => {
   const theme = useTheme();
@@ -25,25 +27,25 @@ const StatisticsSection = () => {
 
   const stats = [
     {
-      icon: <MenuBook fontSize="large" sx={{ color: theme.palette.secondary.main }} />,
+      icon: <MenuBook fontSize="large" sx={{ color: theme.palette.primary.main}} />,
       label: 'رسالة بحثية',
       count: counts.research,
       target: targetCounts.research
     },
     {
-      icon: <School fontSize="large" sx={{ color: theme.palette.secondary.main }} />,
+      icon: <School fontSize="large" sx={{ color: theme.palette.primary.main }} />,
       label: 'طالب وباحث',
       count: counts.students,
       target: targetCounts.students
     },
     {
-      icon: <CheckCircle fontSize="large" sx={{ color: '#4caf50' }} />,
+      icon: <CheckCircle fontSize="large" sx={{ color: theme.palette.primary.main }} />,
       label: 'عنوان معتمد',
       count: counts.approved,
       target: targetCounts.approved
     },
     {
-      icon: <Timeline fontSize="large" sx={{ color: '#ff9800' }} />,
+      icon: <Timeline fontSize="large" sx={{ color: theme.palette.primary.main }} />,
       label: 'جامعة وكلية',
       count: counts.universities,
       target: targetCounts.universities
@@ -81,9 +83,14 @@ const StatisticsSection = () => {
     <Box
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: theme.palette.mode === 'light' 
-          ? '#f7fafc' // لون فاتح جديد في وضع light
-          : theme.palette.grey[900],
+      
+        // borderTop:'3px solid', 
+        // borderBottom:'3px solid',
+        ...theme.bgGrid3,   
+        borderColor:theme.palette.bg2.main, 
+        backgroundColor: theme.palette.bg1.main,   
+
+
       }}
     >
       <Container maxWidth="lg">
@@ -91,13 +98,9 @@ const StatisticsSection = () => {
           {/* الجانب الأيسر: محتوى تعريفي */}
           <Grid item xs={12} md={6}>
             <Box sx={{ pr: { md: 6 }, textAlign: { xs: 'center', md: 'center' } }}>
-              <Typography variant="h2" fontWeight={800} mb={2} color={theme.palette.text.primary}>
-                أرقام وإحصائيات المكتبة
-              </Typography>
-              <Typography variant="body1" color={theme.palette.text.secondary} mb={3}>
-                نعتز بخدمة آلاف الباحثين والطلاب من مختلف الجامعات، ونعمل باستمرار على دعم البحث العلمي وتوفير بيئة معرفية متكاملة.
-              </Typography>
-              <Typography variant="body2" color={theme.palette.text.disabled}>
+              <MainTitle mainTitle={"أرقام وإحصائيات المكتبة"}/>
+              <MainText mainText={"نعتز بخدمة آلاف الباحثين والطلاب من مختلف الجامعات، ونعمل باستمرار على دعم البحث العلمي وتوفير بيئة معرفية متكاملة."} />
+              <Typography variant="body2" sx={{ mt: 8 }} color={theme.palette.text.disabled}>
                 جميع الإحصائيات محدثة حتى مايو 2025.
               </Typography>
             </Box>
@@ -108,21 +111,21 @@ const StatisticsSection = () => {
               {stats.map((stat, index) => (
                 <Box key={index} sx={{ mb: 4 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <Box sx={{ mr: 2 }}>{stat.icon}</Box>
+                    <Box sx={{ mr: 2 }} >{stat.icon}</Box>
                     <Typography variant="subtitle1" fontWeight={700} color={theme.palette.text.primary}>
-                      {stat.label}
+                      <MainText mainText={stat.label} />
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Typography variant="h6" fontWeight={700} color={theme.palette.primary.main}>
-                      {stat.count.toLocaleString('ar-SA')}+
+                    <Typography variant="h6" fontWeight={700}  color={theme.palette.primary.main}>
+                      {stat.count.toLocaleString('ar')}+
                     </Typography>
                   </Box>
                   <Box sx={{ width: '100%' }}>
                     <Box
                       sx={{
-                        height: 10,
+                        height: 5,
                         borderRadius: 5,
-                        background: theme.palette.mode === 'light' ? '#e0eafc' : theme.palette.grey[800],
+                        background:  theme.palette.grey[900],
                         overflow: 'hidden',
                       }}
                     >
@@ -130,7 +133,8 @@ const StatisticsSection = () => {
                         sx={{
                           width: `${(stat.count / stat.target) * 100}%`,
                           height: '100%',
-                          background: theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.secondary.main,
+                          background: theme.palette.line.main,
+                          background: theme.palette.primary.main,
                           transition: 'width 0.6s',
                         }}
                       />

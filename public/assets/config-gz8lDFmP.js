@@ -1,0 +1,1 @@
+var s={};const e=s.REACT_APP_API_BASE_URL||"https://alalem.c-library.org/api",t=e.split("/api")[0],i={latestTheses:`${e}/theses/latest`,searchTheses:`${e}/theses/search`,universities:`${e}/universities`,specializations:`${e}/specializations`,degrees:`${e}/degrees`,reservedThesisTitles:`${e}/reserved-thesis-titles-search-guests`};export{e as A,t as B,i as e};

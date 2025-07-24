@@ -9,7 +9,7 @@ const NotFoundPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: theme.palette.mode === 'light' ? '#f7fafc' : theme.palette.background.default,
+        background: theme.palette.background.default,
         pt: 8,
         pb: 8,
       }}
