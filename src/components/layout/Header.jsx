@@ -33,6 +33,7 @@ import {
   GitHub,
 } from '@mui/icons-material';
 import SchoolIcon from '@mui/icons-material/School';
+import InfoIcon from '@mui/icons-material/Info';
 import { ColorModeContext } from '../../contexts/ThemeContext';
 import MainTitle from '../MainTitle';
 import MainText from '../MainText';
@@ -47,6 +48,7 @@ const Header = () => {
 
   const navItems = [
     { label: 'الرئيسية', path: '/', icon: <Home /> },
+    { label: 'من نحن', path: '/about', icon: <InfoIcon /> },
     { label: 'البحث الأكاديمي', path: '/academic-search', icon: <Search /> },
     { label: 'المكتبة الإلكترونية', path: '/library', icon: <LibraryBooks /> },
     { label: 'معاملات جاهزة', path: '/ready-transactions', icon: <Assignment /> },
@@ -172,7 +174,7 @@ const Header = () => {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <IconButton onClick={toggleColorMode} size="small">
+        <IconButton onClick={toggleColorMode} size="small" aria-label="تبديل الوضع المظلم">
           {mode === 'dark' ? <LightMode /> : <DarkMode />}
         </IconButton>
         
@@ -291,6 +293,7 @@ const Header = () => {
                 key={item.label}
                 component={Link}
                 to={item.path}
+                aria-label={item.label}
                 sx={{ 
                   color: 'inherit', 
                   mx: 1,
@@ -306,8 +309,7 @@ const Header = () => {
 
           <IconButton 
             onClick={toggleColorMode} 
-            // color="inherit"
-            
+            aria-label="تبديل الوضع المظلم"
             sx={{ ml: 1,
               color:theme.palette.primary.main
              }}

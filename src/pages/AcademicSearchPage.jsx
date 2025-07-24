@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react';
-import { Box, Container, Typography, TextField, Button, Grid, useTheme, Alert } from '@mui/material';
+import { Box, Container, Typography, TextField, Button, useTheme, Alert, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import MainTitle from '../components/MainTitle';
@@ -29,8 +29,8 @@ const AcademicSearchPage = () => {
       const data = await res.json();
 
       setLoading(false);
-      if (data && data.length > 0) {
-        setResult(data);
+      if (data && data.data && data.data.length > 0) {
+        setResult(data.data);
       } else {
         setNotFound(true);
       }
@@ -109,41 +109,32 @@ const AcademicSearchPage = () => {
         {Array.isArray(result) && result.length > 0 && (
           <>
             <Typography variant="subtitle1" sx={{ mt: 2, textAlign: 'right', fontWeight: 600, color: theme.palette.primary.main }}>
-              تم العثور على 
-              <span style={{ backgroundColor: '#33d13df9', padding: '4px 7px', borderRadius: '5px', border:'1px solid yellow', color:'#fff'}}>{result.length}</span> نتيجة
+              تم العثور على
+              <span style={{ backgroundColor: theme.palette.bg3.main, padding: '4px 7px', borderRadius: '5px',border:'1px solid yellow',color:'#fff'}}>{result.length}</span> نتيجة
             </Typography>
-            <Grid container spacing={3} sx={{ mt: 2 }}>
-            {result.map((item, idx) => (
-              <Grid item xs={12} sm={6} md={6} key={idx}>
-                <Box
-                  sx={{
-                    ...theme.card1, // Apply card1 properties
-                    p: 3,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: 180,
-                    justifyContent: 'space-between',
-                    '&:hover': {
-                      boxShadow: theme.shadows[theme.palette.mode === 'light' ? 8 : 16],
-                    },
-                  }}
-                >
-                  <Typography variant="h6" fontWeight={800} color={theme.palette.primary} gutterBottom sx={{ mb: 1, textAlign: 'center', fontSize: '1.1rem' }}>
-                    {item.title}
-                  </Typography>
-                  <Box sx={{ borderBottom: `1px solid ${theme.palette.divider}`, mb: 2, opacity: 0.5 }} />
-                  <Typography variant="body1" fontWeight={600} color={theme.palette.text.secondary} sx={{ mb: 2, textAlign: 'center' }}>
-                    {item.person_name || '---'}
-                  </Typography>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
-                    <Typography variant="body2" color={theme.palette.text.secondary} fontWeight={500}>
-                      {item.university || '---'}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
+
+            <TableContainer component={Paper} sx={{ mt: 2, ...theme.card2, direction: 'rtl'}}>
+              <Table dir="rtl">
+              <TableHead>
+                <TableRow sx={{ backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.05)' }}>
+                  <TableCell sx={{ fontWeight: 700, textAlign: 'start' }}>الجامعة</TableCell>
+                  <TableCell sx={{ fontWeight: 700, textAlign: 'start' }}>اسم الباحث</TableCell>
+                  <TableCell sx={{ fontWeight: 700, textAlign: 'start' }}>عنوان الرسالة</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {result.map((item, idx) => (
+                  <TableRow key={idx} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableCell sx={{ textAlign: 'start' }}>{item.university || '---'}</TableCell>
+                    <TableCell sx={{ textAlign: 'start' }}>
+                      {item.person_name ? highlightSearchTerm(item.person_name, search) : '---'}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'start' }}>{item.title}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
           </>
         )}
         {notFound && (
@@ -153,6 +144,20 @@ const AcademicSearchPage = () => {
         )}
       </Container>
     </Box>
+  );
+};
+
+// Function to highlight the search term in text
+const highlightSearchTerm = (text, searchTerm) => {
+  if (!text || !searchTerm.trim()) return text;
+  
+  const regex = new RegExp(`(${searchTerm.trim()})`, 'gi');
+  const parts = text.split(regex);
+  
+  return parts.map((part, i) =>
+    regex.test(part) ?
+      <span key={i} style={{ backgroundColor: '#33d13d99', padding: '3px 7px', borderRadius: '5px',border:'1px solid yellow' }}>{part}</span> :
+      part
   );
 };
 

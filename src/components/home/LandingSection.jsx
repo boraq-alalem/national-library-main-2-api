@@ -62,6 +62,7 @@ const LandingSection = () => {
                         component={Link}
                         to="/ready-transactions"
                         variant="outlined"
+                        aria-label="معاملات جاهزة"
                         sx={{
                             border: `2px solid ${theme.palette.primary.main}`,
                             background: 'transparent',
@@ -95,10 +96,14 @@ const LandingSection = () => {
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 8, gap: 7 }}>
-                    <Box component="img" src="/v1_assets/banner/banner-1-Photoroom (1).png" alt="banner-1" sx={{ width: 140 }} />
-                    <Box component="img" src="/v1_assets/banner/banner-2-Photoroom.png" alt="banner-2" sx={{ width: 170 ,
-                        filter: 'brightness(1.8) contrast(1.5) invert(0.1)',
-                    }} />
+                    <picture>
+                        <source srcSet="/v1_assets/banner/banner-1-Photoroom (1).webp" type="image/webp" />
+                        <img src="/v1_assets/banner/banner-1-Photoroom (1).png" alt="banner-1" width="140" height="140" style={{ width: 140 }} />
+                    </picture>
+                    <picture>
+                        <source srcSet="/v1_assets/banner/banner-2-Photoroom.webp" type="image/webp" />
+                        <img src="/v1_assets/banner/banner-2-Photoroom.png" alt="banner-2" width="170" height="170" style={{ width: 170, filter: 'brightness(1.8) contrast(1.5) invert(0.1)' }} />
+                    </picture>
                 </Box>
             </Container>
             <Box

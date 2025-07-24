@@ -53,16 +53,16 @@ const Footer = () => {
     icon: <LocationOn fontSize="small" />, 
     text: (
       <a href="https://www.google.com/maps/place/V8JW%2BVH7+%D8%A7%D9%84%D9%85%D9%83%D8%AA%D8%A8%D8%A9+%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%D8%A9+%D8%A7%D9%84%D9%84%D9%8A%D8%A8%D9%8A%D8%A9%D8%8C+Unnamed+Road,,+%D8%B7%D8%B1%D8%A7%D8%A8%D9%84%D8%B3%E2%80%AD/data=!4m2!3m1!1s0x13a89011fa8fe2db:0xea156bcea5bac97c?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI1LjIwLjEYACDXggMqhgEsOTQyNjc3MjY5NDI3NTMwMyw5NDIyMzI5OSw5NDIxNjQxMyw5NDIxMjQ5Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxNzUyMyw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw0NzA4NDM5Myw5NDIxMzIwMCw5NDI1ODMyNUICTFk%3D&skid=02a61db8-ed35-4347-b708-4ba7f51cdb20&g_st=aw" target="_blank" rel="noopener noreferrer" style={{color: 'inherit', textDecoration: 'underline'}}>
-        موقع المكتبة على الخريطة
+        <span aria-label="موقع المكتبة على الخريطة">موقع المكتبة على الخريطة</span>
       </a>
     )
   };
 
   const socialLinks = [
-    { icon: <Facebook />, url: 'https://www.facebook.com/Maktabatajora?rdid=z0nFsStIE3Dz9tWc&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18dx6CgzLS%2F' },
-    { icon: <Twitter />, url: '#' },
-    { icon: <Instagram />, url: '#' },
-    { icon: <LinkedIn />, url: '#' },
+    { icon: <Facebook />, url: 'https://www.facebook.com/Maktabatajora?rdid=z0nFsStIE3Dz9tWc&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18dx6CgzLS%2F', label: 'فيسبوك' },
+    { icon: <Twitter />, url: '#', label: 'تويتر' },
+    { icon: <Instagram />, url: '#', label: 'انستغرام' },
+    { icon: <LinkedIn />, url: '#', label: 'لينكدإن' },
   ];
 
   return (
@@ -162,6 +162,8 @@ const Footer = () => {
                   key={index} 
                   href={social.url} 
                   color="text.secondary"
+                  aria-label={social.label}
+                  rel="noopener noreferrer"
                   sx={{ 
                     '&:hover': { 
                       color: theme.palette.primary.main 

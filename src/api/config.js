@@ -7,8 +7,8 @@ export const BASE_DOMAIN = API_BASE_URL.split('/api')[0];
 // النقاط النهائية للـ API
 export const endpoints = {
   // الرسائل
-  latestTheses: `${API_BASE_URL}/theses/latest`,
-  searchTheses: `${API_BASE_URL}/theses/search`,
+  latestTheses: `${API_BASE_URL}/theses/latest-guests`,
+  searchTheses: `${API_BASE_URL}/theses/search-guests`,
   
   // البيانات الأساسية
   universities: `${API_BASE_URL}/universities`,
