@@ -33,6 +33,7 @@ import {
   GitHub,
 } from '@mui/icons-material';
 import SchoolIcon from '@mui/icons-material/School';
+import InfoIcon from '@mui/icons-material/Info';
 import { ColorModeContext } from '../../contexts/ThemeContext';
 import MainTitle from '../MainTitle';
 import MainText from '../MainText';
@@ -50,6 +51,7 @@ const Header = () => {
     { label: 'البحث الأكاديمي', path: '/academic-search', icon: <Search /> },
     { label: 'المكتبة الإلكترونية', path: '/library', icon: <LibraryBooks /> },
     { label: 'معاملات جاهزة', path: '/ready-transactions', icon: <Assignment /> },
+    { label: 'من نحن', path: '/about', icon: <InfoIcon /> },
     { label: 'الكتب', path: '/approval', icon: <Book /> },
     { label: 'طلب الاعتماد', path: '/approval', icon: <Approval /> },
     { label: 'تواصل معنا', path: '/contact', icon: <ContactMail /> },

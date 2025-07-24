@@ -11,7 +11,6 @@ import AcademicSearchPage from './AcademicSearchPage';
 const HomePage = () => {
   return (
     <>
-      {/* <HeroSection /> */}
       <LandingSection />
       <AboutSection />
       <ServicesSection />
