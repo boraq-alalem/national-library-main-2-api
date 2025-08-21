@@ -4,7 +4,7 @@
 echo "Starting image optimization..."
 
 # Create optimized versions of images
-find public -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" | while read img; do
+find public -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -print0 | while IFS= read -r -d '' img; do
     # Get file info
     filename=$(basename "$img")
     dirname=$(dirname "$img")

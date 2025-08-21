@@ -3,6 +3,19 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
+// تحديد المجلدات المسموحة
+const ALLOWED_FOLDERS = [
+  path.resolve('./public/assets'),
+  path.resolve('./public/v1_assets'),
+  path.resolve('./public/portfolio')
+];
+
+// التحقق من أن المسار آمن
+function isPathSafe(filePath) {
+  const resolvedPath = path.resolve(filePath);
+  return ALLOWED_FOLDERS.some(folder => resolvedPath.startsWith(folder));
+}
+
 const exts = ['.jpg', '.jpeg', '.png'];
 const folders = [
   './public/assets',
@@ -16,9 +29,12 @@ const folders = [
 
 function getAllImages(dir) {
   let results = [];
-  if (!fs.existsSync(dir)) return results;
+  if (!fs.existsSync(dir) || !isPathSafe(dir)) return results;
+  
   fs.readdirSync(dir).forEach(file => {
     const filePath = path.join(dir, file);
+    if (!isPathSafe(filePath)) return;
+    
     const stat = fs.statSync(filePath);
     if (stat && stat.isDirectory()) {
       results = results.concat(getAllImages(filePath));
@@ -30,6 +46,11 @@ function getAllImages(dir) {
 }
 
 async function convertToWebP(imgPath) {
+  if (!isPathSafe(imgPath)) {
+    console.error('Unsafe path detected:', imgPath);
+    return;
+  }
+  
   const outPath = imgPath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   if (fs.existsSync(outPath)) return;
   // Resize: إذا كانت الصورة أعرض من 500px، صغّرها إلى 500px عرض

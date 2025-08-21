@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from '@mui/material';
 import MainTitle from '../components/MainTitle';
 import MainText from '../components/MainText';
+import { sanitizeText } from '../utils/security';
 
 const ReadyTransactions = () => {
   return (

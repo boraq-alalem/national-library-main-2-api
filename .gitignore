@@ -10,6 +10,22 @@ dist/
 .DS_Store
 .env
 .env.*
+!.env.example
+
+# Security and sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+config/secrets.js
+config/keys.js
+*.log
+logs/
+
+# Backup files
+*.bak
+*.backup
+*.tmp
 
 # logs
 npm-debug.log*

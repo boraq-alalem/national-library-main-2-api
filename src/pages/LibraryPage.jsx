@@ -14,6 +14,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MainTitle from '../components/MainTitle';
 import MainText from '../components/MainText';
 import { API_BASE_URL, BASE_DOMAIN, endpoints } from '../api/config';
+import { sanitizeText, sanitizeUrl } from '../utils/security';
 
 const LibraryPage = () => {
   const theme = useTheme();
@@ -367,20 +368,20 @@ const LibraryPage = () => {
               >
                 <Typography variant="h6" sx={{ fontWeight: 700, color: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.common.white, mb: 1, textAlign: 'right', fontSize: { xs: 16, md: 18 }, display: 'flex', alignItems: 'center', gap: 1, direction: 'rtl',textAlign: 'end' }}>
                   <BookOutlinedIcon sx={{ ml: 1, color: 'primary.main' }} />
-                  {item.title}
+                  {sanitizeText(item.title)}
                 </Typography>
                 <Box sx={{ borderTop: '1px solid', borderColor: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.divider, width: '100%', mb: 2 }} />
                 <Grid container spacing={2} alignItems="center" direction="row-reverse">
                   <Grid item xs={12} sm={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexDirection: 'row-reverse', background: (theme) => theme.palette.mode === 'light' ? theme.palette.background.default : theme.palette.background.paper, borderRadius: 2, p: 1, border: (theme) => theme.palette.mode === 'light' ? `1px solid ${theme.palette.divider}` : `1px solid ${theme.palette.divider}`, fontSize: 15, color: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.common.white, direction: 'rtl', textAlign: 'right' }}>
                       <PersonOutlineIcon sx={{ color: 'primary.main', ml: 1 }} />
-                      <Typography sx={{ fontWeight: 500 }}>{item.author || ''}</Typography>
+                      <Typography sx={{ fontWeight: 500 }}>{sanitizeText(item.author || '')}</Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexDirection: 'row-reverse', background: (theme) => theme.palette.mode === 'light' ? theme.palette.background.default : theme.palette.background.paper, borderRadius: 2, p: 1, border: (theme) => theme.palette.mode === 'light' ? `1px solid ${theme.palette.divider}` : `1px solid ${theme.palette.divider}`, fontSize: 15, color: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.common.white, direction: 'rtl', textAlign: 'right' }}>
                       <AccountBalanceOutlinedIcon sx={{ color: 'primary.main', ml: 1 }} />
-                      <Typography sx={{ fontWeight: 500 }}>{item.university || ''}</Typography>
+                      <Typography sx={{ fontWeight: 500 }}>{sanitizeText(item.university || '')}</Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -392,13 +393,13 @@ const LibraryPage = () => {
                   <Grid item xs={12} sm={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexDirection: 'row-reverse', background: (theme) => theme.palette.mode === 'light' ? theme.palette.background.default : theme.palette.background.paper, borderRadius: 2, p: 1, border: (theme) => theme.palette.mode === 'light' ? `1px solid ${theme.palette.divider}` : `1px solid ${theme.palette.divider}`, fontSize: 15, color: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.common.white, direction: 'rtl', textAlign: 'right' }}>
                       <SchoolOutlinedIcon sx={{ color: 'primary.main', ml: 1 }} />
-                      <Typography sx={{ fontWeight: 500 }}>{item.degree || ''}</Typography>
+                      <Typography sx={{ fontWeight: 500 }}>{sanitizeText(item.degree || '')}</Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexDirection: 'row-reverse', background: (theme) => theme.palette.mode === 'light' ? theme.palette.background.default : theme.palette.background.paper, borderRadius: 2, p: 1, border: (theme) => theme.palette.mode === 'light' ? `1px solid ${theme.palette.divider}` : `1px solid ${theme.palette.divider}`, fontSize: 15, color: (theme) => theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.common.white, direction: 'rtl', textAlign: 'right' }}>
                       <BusinessCenterOutlinedIcon sx={{ color: 'primary.main', ml: 1 }} />
-                      <Typography sx={{ fontWeight: 500 }}>{item.specialization || ''}</Typography>
+                      <Typography sx={{ fontWeight: 500 }}>{sanitizeText(item.specialization || '')}</Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={6}>
