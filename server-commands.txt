@@ -1,0 +1,29 @@
+# نسخ هذه الأوامر وتنفيذها على خادم الهوستنقر:
+
+# 1. إنشاء backup للإعدادات الحالية
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+
+# 2. تحرير ملف Nginx
+sudo nano /etc/nginx/sites-available/default
+
+# 3. إضافة هذه الأسطر داخل server block (بعد server_name):
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;" always;
+add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-Frame-Options "DENY" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+# 4. حفظ الملف (Ctrl+X ثم Y ثم Enter)
+
+# 5. اختبار الإعدادات
+sudo nginx -t
+
+# 6. إعادة تحميل Nginx
+sudo systemctl reload nginx
+
+# 7. التحقق من النتائج
+curl -I https://c-library.org
+
+
+
